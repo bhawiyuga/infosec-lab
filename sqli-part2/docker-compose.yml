@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: sqli-part2
+    container_name: sqli-part2-app
+    restart: always
+    ports:
+      - "82:80"
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:latest
+    container_name: sqli-part2-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sqli
+      MYSQL_USER: sqli
+      MYSQL_PASSWORD: sqli
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
