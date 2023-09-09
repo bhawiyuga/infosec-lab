@@ -72,6 +72,29 @@ outputs:
       filename: fast.log
       append: yes
 
+# Logging configuration.  This is not about logging IDS alerts/events, but
+# output about what Suricata is doing, like startup messages, errors, etc.
+logging:
+  default-log-level: notice
+
+  default-output-filter:
+
+  outputs:
+  - console:
+      enabled: yes
+      # type: json
+  - file:
+      enabled: yes
+      level: info
+      filename: /var/log/suricata/suricata.log
+      # type: json
+  - syslog:
+      enabled: no
+      facility: local5
+      format: "[%i] <%d> -- "
+      # type: json
+
+
 af-packet:
   - interface: eth1
   - interface: eth0
